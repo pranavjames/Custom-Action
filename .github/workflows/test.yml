@@ -2,7 +2,7 @@ name: Testing for custom actions
 
 on :  
   push:
-    branches: main
+    branches: [main]
   workflow_dispatch:  
 
 jobs:
@@ -23,5 +23,17 @@ jobs:
 
       - name: use cutsom actions
       # ./ => action.yml file is in current directory
-        uses: ./  
+        uses: ./ 
+
+      - name: custom actions in different repository
+        uses: pranavjames/Custom-Action@v1
+        with:
+          GITHUB_TOKEN: 'GITHUB TOKEN FROM ANOTHER REPOSITORY'
+          TENOR: 'TENOR API TOKEN FROM ANOTHER REPOSITORY' 
+
+        # uses: actions/checkout@v4
+        # with:
+        #   repository: pranavjames/custom-action-javascript
+        #   ref: main
+        #   path: custom-action-javascript     
 
