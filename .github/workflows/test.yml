@@ -1,0 +1,29 @@
+name: Testing for custom actions
+description: This workflow is to test the custom action
+
+
+on :  
+  push:
+    branches: main
+  workflow_dispatch:  
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: clone the repository
+        uses: actions/checkout@v2
+
+      - name: setup the node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20   
+
+      - name: print pwd
+        run: pwd    
+
+      - name: use cutsom actions
+      # ./ => action.yml file is in current directory
+        uses: ./  
+
