@@ -1,6 +1,4 @@
 name: Testing for custom actions
-description: This workflow is to test the custom action
-
 
 on :  
   push:
