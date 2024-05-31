@@ -16,7 +16,7 @@ const TENOR = process.env.INPUT_TENOR;
 const GITHUB_TOKEN = core.getInput("GITHUB_TOKEN");
 const TENOR = core.getInput("TENOR");
 const src = __dirname;
-console.log("GITHUB_TOKEN:"+GITHUB_TOKEN + " src:" + src +" TENOR:"+TENOR+" src:"+src );
+console.log("GITHUB_TOKEN:"+GITHUB_TOKEN + " src:" + src +" TENOR:"+TENOR+" src:"+src )
 console.log('Hello, world!');
 
 
