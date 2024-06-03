@@ -10,6 +10,7 @@ jobs:
     outputs:
       output1: ${{steps.step1Id.outputs.test}}
       output2: ${{steps.step2Id.outputs.test}}
+      output3: ${{steps.step2Id.outputs.testt}}
     steps:
       - name: Stage1 from CI job1
         id: step1Id
@@ -20,6 +21,7 @@ jobs:
         id: step2Id
         run: |
           echo "test=stage2" >> $GITHUB_OUTPUT 
+          echo "testt=stage3" >> $GITHUB_OUTPUT
 
   cd-job:
     runs-on: ubuntu-latest
@@ -31,6 +33,7 @@ jobs:
         run: |
           echo "output from cd-job step: $INPUT_TEST"
           echo "below is output: ${{ needs.ci-job.outputs.output2 }}"
+          echo "below is output3: ${{ needs.ci-job.outputs.output3 }}"
 
 
 # jobs:
