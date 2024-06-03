@@ -29,4 +29,4 @@ jobs:
           INPUT_TEST: ${{ needs.ci-job.outputs.output1 }}
         run: |
           echo "output from cd-job step: ${INPUT_TEST}"
-          echo "below is output: {{needs.ci-job.outputs.output1}}"
+          echo "below is output: ${{needs.ci-job.outputs.output1}}"
