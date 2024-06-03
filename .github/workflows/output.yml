@@ -8,8 +8,8 @@ jobs:
   ci-job:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${steps.step1Id.outputs.test}
-      output2: ${steps.step2Id.outputs.test}
+      output1: ${{steps.step1Id.outputs.test}}
+      output2: ${{steps.step2Id.outputs.test}}
     steps:
       - name: Stage1 from CI job1
         id: step1Id
