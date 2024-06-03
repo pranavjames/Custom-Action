@@ -11,14 +11,14 @@ jobs:
       output1: ${steps.stage1Id.outputs.test}
     steps:
       - name: Stage1 from CI job1
-        id: stap1Id
+        id: step1Id
         run: |
-           echo "Hi there this is the output from stage1" >> $GITHUB_OUTPUT
+           echo "test=stage1" >> $GITHUB_OUTPUT
 
       - name: Stage2 from CI job2
         id: step2Id
         run: |
-          echo "Hi tehre this is the outpt from stage2" >> $GITHUB_OUPTUT 
+          echo "test=stage2" >> $GITHUB_OUTPUT 
 
   cd-job:
     runs-on: ubuntu-latest
