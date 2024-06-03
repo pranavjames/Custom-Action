@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{steps.step1Id.outputs.test}}
+      output2: ${{steps.step2Id.outputs.test}}
     steps:
       - name: Stage1 from CI job1
         id: step1Id
@@ -29,6 +30,7 @@ jobs:
           INPUT_TEST: ${{ needs.ci-job.outputs.output1 }}
         run: |
           echo "output from cd-job step: $INPUT_TEST"
+          echo "below is output: ${{ needs.ci-job.outputs.output2 }}"
 
 
 # jobs:
