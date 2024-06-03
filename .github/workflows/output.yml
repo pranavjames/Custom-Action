@@ -25,5 +25,7 @@ jobs:
     needs: ci-job
     steps:
       - name: Step1 from cd job
+        env:
+          INPUT_TEST: ${{ needs.ci-job.outputs.output1 }}
         run: |
-          echo "output from cd-job step: ${{ needs.ci-job.outputs.output1 }}"
+          echo "output from cd-job step: $INPUT_TEST"
