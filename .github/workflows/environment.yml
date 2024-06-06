@@ -4,8 +4,7 @@ on:
     branches:
       - main
       - dev
-  pull_request: 
-    branches: [main, dev]  
+  pull_request: [main, dev]  
 
   workflow_dispatch:
     branches:
@@ -27,7 +26,7 @@ jobs:
           node-version: 20
 
       - name: Print the dev environment variable
-        run: echo ${{ vars.VAR1 }}  
+        run: echo ${{ env.VAR1 }}  
   
   staging:
     runs-on: ubuntu-latest
@@ -42,4 +41,4 @@ jobs:
           node-version: 20
 
       - name: Print the staging environment variable
-        run: echo ${{ vars.VAR1 }}       
+        run: echo ${{ env.VAR1 }}       
