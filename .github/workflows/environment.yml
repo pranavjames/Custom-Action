@@ -27,7 +27,7 @@ jobs:
           node-version: 20
 
       - name: Print the dev environment variable
-        run: echo ${{ env.VAR1 }}  
+        run: echo ${{ vars.VAR1 }}  
   
   staging:
     runs-on: ubuntu-latest
