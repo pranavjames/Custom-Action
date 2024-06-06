@@ -28,7 +28,11 @@ jobs:
 
       - name: Print the dev environment variable
         run: echo ${{ vars.VAR1 }}  
-  
+
+      - name: Print the dev environment secret
+        run: echo ${{ secrets.SEC1 }}
+
+
   staging:
     runs-on: ubuntu-latest
     environment: STAGING
@@ -42,4 +46,7 @@ jobs:
           node-version: 20
 
       - name: Print the staging environment variable
-        run: echo ${{ vars.VAR1 }}       
+        run: echo ${{ vars.VAR1 }}
+
+      - name: Print the staging environment secret
+        run: echo ${{ secrets.SEC1 }}         
