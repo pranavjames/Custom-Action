@@ -7,39 +7,39 @@ on:
   pull_request: 
     branches: [main, dev]  
 
-  # workflow_dispatch:
-  #   branches:
-  #     - main
-  #     - dev
+  workflow_dispatch:
+    branches:
+      - main
+      - dev
+      
+jobs: 
 
-  jobs: 
+  development:
+    runs-on: ubuntu-latest
+    environment: DEV
+    steps:
+      - name : Checkout the repository
+        uses: actions/checkout@v4
 
-    development:
-      runs-on: ubuntu-latest
-      environment: DEV
-      steps:
-        - name : Checkout the repository
-          uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-        - name: Setup Node
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
+      - name: Print the dev environment variable
+        run: echo ${{ vars.VAR1 }}  
+  
+  staging:
+    runs-on: ubuntu-latest
+    environment: STAGING
+    steps:
+      - name : Checkout the repository
+        uses: actions/checkout@v4
 
-        - name: Print the dev environment variable
-          run: echo ${{ vars.VAR1 }}  
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    staging:
-      runs-on: ubuntu-latest
-      environment: STAGING
-      steps:
-        - name : Checkout the repository
-          uses: actions/checkout@v4
-
-        - name: Setup Node
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
-
-        - name: Print the staging environment variable
-          run: echo ${{ vars.VAR1 }}       
+      - name: Print the staging environment variable
+        run: echo ${{ vars.VAR1 }}       
