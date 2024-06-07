@@ -50,3 +50,4 @@ jobs:
 
       - name: Print the staging environment secret
         run: echo ${{ secrets.SEC1 }}         
+
