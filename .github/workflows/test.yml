@@ -33,7 +33,8 @@ jobs:
           TENOR: 'TENOR API TOKEN FROM ANOTHER REPOSITORY' 
           
       - name: print github actions result
-        run: echo ${{ steps.getActions.outputs.github_tkn }}
+        run: |
+          echo "output: ${{ steps.getActions.outputs.github_tkn }}"
         # uses: actions/checkout@v4
         # with:
         #   repository: pranavjames/custom-action-javascript
