@@ -11,6 +11,13 @@ inputs:
     description: 'TENOR API token'
     required: true
     default: 'DEFAULT TENOR TOKEN'
+    
+outputs:
+  github_tkn:
+    description: 'Output of actions'
+    required: true
+    default: 'Default value for output for actions'
+ 
 runs:
   using: 'node20'
   main: 'src/index.js'
