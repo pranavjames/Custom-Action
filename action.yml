@@ -15,8 +15,9 @@ inputs:
 outputs:
   github_tkn:
     description: 'Output of actions'
-    required: true
-    default: 'Default value for output for actions'
+    # Not required otherwise will generate
+    # required: true
+    # default: 'Default value for output for actions'
  
 runs:
   using: 'node20'
