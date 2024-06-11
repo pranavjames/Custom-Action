@@ -26,11 +26,14 @@ jobs:
         uses: ./ 
 
       - name: custom actions in different repository
+        id: getActions
         uses: pranavjames/Custom-Action@v1
         with:
           GITHUB_TOKEN: 'GITHUB TOKEN FROM ANOTHER REPOSITORY'
           TENOR: 'TENOR API TOKEN FROM ANOTHER REPOSITORY' 
-
+          
+      - name: print github actions result
+        run: echo ${{ steps.getActions.outputs.github_tkn }}
         # uses: actions/checkout@v4
         # with:
         #   repository: pranavjames/custom-action-javascript
