@@ -18,6 +18,6 @@ const TENOR = core.getInput("TENOR");
 const src = __dirname;
 console.log("GITHUB_TOKEN:"+GITHUB_TOKEN + " TENOR:"+TENOR+" src:"+src );
 console.log('Hello, world!');
-
+core.setOutput("github_tkn",GITHUB_TOKEN);
 
   
