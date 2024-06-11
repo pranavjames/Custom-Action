@@ -27,7 +27,7 @@ jobs:
 
       - name: custom actions in different repository
         id: getActions
-        uses: pranavjames/Custom-Action@v1
+        uses: pranavjames/Custom-Action@v2
         with:
           GITHUB_TOKEN: 'GITHUB TOKEN FROM ANOTHER REPOSITORY'
           TENOR: 'TENOR API TOKEN FROM ANOTHER REPOSITORY' 
