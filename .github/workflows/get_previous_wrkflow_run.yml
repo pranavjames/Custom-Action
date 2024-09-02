@@ -1,4 +1,4 @@
-name: Check Previous Workflow Events
+name: Check Previous Workflow Events Latest
 
 on:
   push:
