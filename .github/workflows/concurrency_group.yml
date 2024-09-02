@@ -1,0 +1,22 @@
+name: Concurrency Workflow for concurrency group
+
+on:
+  push:
+    branches:
+      - main
+  
+
+jobs:
+  job1:
+    concurrency:
+      group: ${{ github.workflow-github.ref-github.event.pull_request.number}}||{{github.event.pull_request.number }}
+      cancel-in-progress: true 
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1
+        run: |
+          echo "In the step1 before sleep"
+          sleep 2m
+          echo "In the step1 after sleep"  
