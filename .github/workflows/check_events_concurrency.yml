@@ -44,4 +44,3 @@ jobs:
           else
             echo "No active workflow run events found."
           fi
-has context menu
