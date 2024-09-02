@@ -18,7 +18,7 @@ outputs:
     # Not required otherwise will generate
     # required: true
     # default: 'Default value for output for actions'
- 
+    # commit to check concurrency 1
 runs:
   using: 'node20'
   main: 'src/index.js'
