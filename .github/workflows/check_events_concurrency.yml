@@ -1,0 +1,47 @@
+name: Check Previous and Active Workflow Events
+ 
+on:
+  push:
+    branches: [main]
+ 
+jobs:
+  check_events:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get Previous Workflow Runs
+        id: previous_runs
+        uses: actions/workflow-dispatch@v1
+        with:
+          workflow_id: ${{ github.workflow_id }}
+          ref: ${{ github.ref }}
+          inputs:
+            page: 1
+            per_page: 100
+      - name: Get Active Workflow Runs
+        id: active_runs
+        uses: actions/workflow-dispatch@v1
+        with:
+          workflow_id: ${{ github.workflow_id }}
+          ref: ${{ github.ref }}
+          inputs:
+            status: in_progress
+      - name: Analyze Workflow Events
+        run: |
+          previous_runs_count=$(echo "${{ steps.previous_runs.outputs.run_id }}" | wc -l)
+          active_runs_count=$(echo "${{ steps.active_runs.outputs.run_id }}" | wc -l)
+ 
+          if [[ $previous_runs_count -gt 0 ]]; then
+            echo "Previous workflow events found:"
+            echo "${{ steps.previous_runs.outputs.run_id }}"
+          else
+            echo "No previous workflow events found."
+          fi
+ 
+          if [[ $active_runs_count -gt 0 ]]; then
+            echo "Active workflow run events found:"
+            echo "${{ steps.active_runs.outputs.run_id }}"
+          else
+            echo "No active workflow run events found."
+          fi
+has context menu
