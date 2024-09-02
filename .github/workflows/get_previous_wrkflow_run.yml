@@ -1,0 +1,45 @@
+name: Check Previous Workflow Events
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check_events:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Previous Workflow Runs
+        id: get_runs
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: workflowRuns } = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: context.workflow,
+              per_page: 100,
+              status: 'completed'
+            });
+
+            const previousRuns = workflowRuns.workflow_runs;
+            const runDetails = previousRuns.map(run => ({
+              id: run.id,
+              trigger_type: run.triggering_actor ? run.triggering_actor.login : 'unknown',
+              commit_message: run.head_commit ? run.head_commit.message : 'N/A'
+            }));
+
+            return runDetails;
+
+      - name: Print Previous Workflow Events
+        run: |
+          echo "Previous Workflow Runs Details:"
+          echo "${{ steps.get_runs.outputs }}"
+          for run in ${{ steps.get_runs.outputs }}; do
+            echo "Run ID: $(echo $run | jq -r '.id')"
+            echo "Trigger Type: $(echo $run | jq -r '.trigger_type')"
+            echo "Commit Message: $(echo $run | jq -r '.commit_message')"
+            echo "-----"
+          done
+        shell: bash
