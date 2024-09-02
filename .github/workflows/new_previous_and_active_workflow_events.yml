@@ -1,0 +1,55 @@
+name: Check Previous and Active Workflow Events
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check_events:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Workflow Runs
+        id: get_runs
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: workflowRuns } = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: context.workflow,
+              per_page: 100
+            });
+
+            const previousRuns = workflowRuns.workflow_runs.filter(run => run.status !== 'in_progress');
+            const activeRuns = workflowRuns.workflow_runs.filter(run => run.status === 'in_progress');
+            
+            console.log(`Previous runs count: ${previousRuns.length}`);
+            console.log(`Active runs count: ${activeRuns.length}`);
+            
+            return {
+              previousRuns: previousRuns.length,
+              activeRuns: activeRuns.length,
+              previousRunsIds: previousRuns.map(run => run.id).join(', '),
+              activeRunsIds: activeRuns.map(run => run.id).join(', ')
+            };
+
+      - name: Analyze Workflow Events
+        run: |
+          echo "Previous runs count: ${{ steps.get_runs.outputs.previousRuns }}"
+          echo "Active runs count: ${{ steps.get_runs.outputs.activeRuns }}"
+
+          if [[ ${{ steps.get_runs.outputs.previousRuns }} -gt 0 ]]; then
+            echo "Previous workflow events found:"
+            echo "${{ steps.get_runs.outputs.previousRunsIds }}"
+          else
+            echo "No previous workflow events found."
+          fi
+
+          if [[ ${{ steps.get_runs.outputs.activeRuns }} -gt 0 ]]; then
+            echo "Active workflow run events found:"
+            echo "${{ steps.get_runs.outputs.activeRunsIds }}"
+          else
+            echo "No active workflow run events found."
+          fi
