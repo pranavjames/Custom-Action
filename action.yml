@@ -19,6 +19,7 @@ outputs:
     # required: true
     # default: 'Default value for output for actions'
     # commit to check concurrency 1
+    # commit to check concurrency 2
 runs:
   using: 'node20'
   main: 'src/index.js'
